@@ -1,0 +1,101 @@
+{% extends 'header.html'%}
+{% load static%}
+{% block  content %}
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Shopping Cart</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="{% url 'index' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="{% url 'cart' %}">Cart</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Picture</th>
+                                <th scope="col">Remove</th>
+
+
+                        </thead>
+                        <tbody>
+                            {% for one in cart %} 
+                            <tr>
+                                 
+                                <td>{{one.product.product_name}}</td>
+                                <td>{{one.product.product_price}}</td>
+                                <td>
+                                    <div class="product_count">
+                                        <input type="text" name="qty" id="{{one.id}}" maxlength="12" placeholder="1" value="1" title="quantity:"
+                                            class="input-text-qty">
+                                </td>
+							    <td>    
+                                <img src="{{one.product.product_pic.url}}" width="100" height="100" alt="">
+                                </td>
+                                <td><a href="{% url 'delete-cart' one.id %}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
+                                </td>
+                                
+                                <!-- <td>1</td> -->
+                            </tr>
+                            {% endfor %}                                 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section> 
+    <center><th scope="col">TOTAL</th></center>
+    <center><h1><th scope="col">{{am}}</th></h1></center>
+    <center><button class="scroll-to-selection" id="pay-btn">PAYMENT</button></center>
+    <!-- Razorpay's Javascript code. -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+       
+        // Enter the Key ID generated from the Dashboard
+        key: "{{ razorpay_merchant_key }}",
+       
+        // Amount is in currency subunits.
+        // Default currency is INR. Hence,
+        // 50000 refers to 50000 paise
+        amount: "{{ razorpay_amount }}",
+        currency: "{{ currency }}",
+       
+        // Your/store name.
+        name: "Dj Razorpay",
+       
+        // Pass the `id` obtained in the response of Step 1
+        order_id: "{{ razorpay_order_id }}",
+        callback_url: "{{ callback_url }}",
+        };
+     
+        // initialise razorpay with the options.
+        var rzp1 = new Razorpay(options);
+     
+        // add event listener to the payment button.
+        document.getElementById("pay-btn").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+        };
+  </script>
+</section>
+
+
+    <!--================End Cart Area =================-->
+
+    {% endblock %}

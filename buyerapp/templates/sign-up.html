@@ -1,0 +1,77 @@
+{% extends 'header.html'%}
+{% load static%}
+{% block  content %}
+
+<!-- End Header Area -->
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Sign-Up/Register</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Sign-Up/Register</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Login Box Area =================-->
+	<section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="login_box_img">
+						<img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+						<div class="hover">
+							<h4>Old to our website?</h4>
+							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+							<a class="primary-btn" href="{% url 'sign-in'%}">Sign-In Your Account</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="login_form_inner">
+						<h3>Sign Up to enter</h3>
+						<div>
+							<center><p style="color:red;">{{msg}}</p></center>
+						</div> 						
+						<form class="row login_form" action="{% url 'sign-up' %}"  method="post" id="contactForm" novalidate="novalidate">
+							{% csrf_token %}
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="fname" name="fname" placeholder="First name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Firstname'">
+							</div>
+                            <div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="lname" name="lname" placeholder="Last name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Lastname'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mobile'">
+							</div>
+                            <div class="col-md-12 form-group">
+								<input type="password" class="form-control" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+                            <div class="col-md-12 form-group">
+								<input type="password" class="form-control" name="cpass" placeholder="Confirm-Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm-Password'">
+							</div>
+							
+							
+                            <div class="col-md-12 form-group">
+								<button type="submit" class="primary-btn">Next</button>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Login Box Area =================-->
+
+	{% endblock %}

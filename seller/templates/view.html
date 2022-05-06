@@ -1,0 +1,111 @@
+{% extends 'header3.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url({% static 'assets/img/slide/slide-2.jpg' %});">
+          <div class="carousel-container">
+            <div class="carousel-content animate__animated animate__fadeInUp">
+               <center><h2>Your Already <span>Added Products</span></h2></center>
+              <p>Here You can able to see your all products in table Form.For adding the products, kindly click on the below Option</p>
+              <center><a href="{% url 'product' %}">Add Products.</a></center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<section id="clients" class="clients">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Your Products</h2>
+    </div>
+
+    <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+         <h5 style="color: forestgreen;">Product Owner</h5>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h5 style="color: forestgreen;">Product Name</h5>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h5 style="color: forestgreen;">Product Price</h5>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+         <div class="client-logo">
+          <h5 style="color: forestgreen;">Product Pic</h5>
+         </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+         <h5 style="color: forestgreen;">Quantity</h5>
+        </div>
+     </div>
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h5 style="color: forestgreen;">Edit / Delete</h5>
+         </div>
+      </div>
+      {% for one in products %}
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h6>{{one.product_owner.fname}}</h6>
+          <!--<img src="assets/img/clients/client-5.png" class="img-fluid" alt="">-->
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h6>{{one.product_name}}</h6>
+          <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h6>{{one.product_price}}</h6>
+          <img src="assets/img/clients/client-7.png" class="img-fluid" alt="">
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <!-- <h6>{{one.product_pic}}</h6> -->
+          <img src="{{one.product_pic.url}}" class="img-fluid" alt="">
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h6>{{one.quantity}}</h6>
+          <img src="assets/img/clients/client-7.png" class="img-fluid" alt="">
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-6">
+        <div class="client-logo">
+          <h6>
+            <div><a href="{% url 'edit-product' one.id %}"><button class="btn btn-primary"><i class="ri-paint-brush-line" style="color: #fffeff;">Edit</button></i></a>
+              <a href="{% url 'delete-product' one.id %}"><button class="btn btn-primary"><i class="ri-gradienter-line" style="color: #aa0606;">Delete</button></i></a></div>
+          </h6>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'header3.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-image: url({% static 'assets/img/slide/slide-1.jpg' %});">
+          <div class="carousel-container">
+            <div class="carousel-content animate__animated animate__fadeInUp">
+              <center><h2>Enter the<span> below Details You Want to Edit</span></h2></center> 
+              <div class="row mt-5 justify-content-center" data-aos="fade-up">
+                <div class="col-lg-10">
+                  <form action="{% url 'edit-product' products.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                     <p>{{msg}}</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                          <input type="text" name="owner_name" value= "{{uid.fname}} {{uid.lname}}" class="form-control" disabled>
+                        </div>
+                       
+                          <div class="col-md-6 form-group">
+                            <input type="text" name="name" value="{{products.product_name}}" class="form-control" placeholder="Product Name">
+                          </div>
+                          <div class="form-group mt-3">
+                            <input type="number" value="{{products.quantity}}" class="form-control" name="Quantity" placeholder="Quantity">
+                          </div>
+                        <div class="form-group mt-3">
+                           <input type="number" value="{{products.product_price}}" class="form-control" name="price" placeholder="Price">
+                        </div>
+                        <div class="form-group mt-3">
+                          <input type="file" class="form-control" name="image" placeholder="Product Pic">
+                        </div>
+                        <div class="form-group mt-3">
+                           <textarea class="form-control" name="message" rows="5" placeholder="Product Description">{{products.product_description}}</textarea>
+                        </div>
+                        <div class="text-center">
+                          <button type="submit" class="btn bg-gradient w-100 my-4 mb-2">Edit Your Product</button>
+                        </div>
+                    </div>
+                  </form>
+                </div> 
+      
+              </div>
+                
+              <div class="text-center">
+               
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
